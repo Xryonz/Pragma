@@ -1,8 +1,9 @@
 import axios from 'axios'
 import type { AuthResponse, Task } from '../types'
 
-// Axios já usa /api/* que o Vite redireciona para o backend
-const api = axios.create({ baseURL: '/api' })
+const api = axios.create({
+  baseURL: import.meta.env.VITE_API_URL ?? '/api'
+})
 
 // Injeta o token JWT em todas as requests automaticamente
 api.interceptors.request.use((config) => {

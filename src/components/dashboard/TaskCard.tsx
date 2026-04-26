@@ -19,9 +19,9 @@ export function TaskCard({ task, onToggle, onEdit, onDelete }: Props) {
     task.deadline && !task.done && new Date(task.deadline + 'T00:00:00') < new Date()
 
   const formatDate = (d: string) =>
-    new Date(d + 'T00:00:00').toLocaleDateString('pt-BR', {
-      day: '2-digit', month: '2-digit', year: '2-digit',
-    })
+  new Date(d + 'T00:00:00').toLocaleDateString('pt-BR', {
+    day: '2-digit', month: '2-digit', year: '2-digit',
+  })
 
   return (
     <div

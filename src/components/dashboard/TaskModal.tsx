@@ -17,7 +17,9 @@ interface Props {
 export function TaskModal({ task, onSave, onClose }: Props) {
   const [title, setTitle] = useState(task?.title ?? '')
   const [description, setDescription] = useState(task?.description ?? '')
-  const [deadline, setDeadline] = useState(task?.deadline ?? '')
+  const [deadline, setDeadline] = useState(
+  task?.deadline ? task.deadline.split('T')[0] : ''
+)
   const [priority, setPriority] = useState<Priority>(task?.priority ?? 'medium')
 
   const handleSave = () => {
