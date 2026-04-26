@@ -5,6 +5,8 @@ const api = axios.create({
   baseURL: import.meta.env.VITE_API_URL ?? '/api'
 })
 
+
+
 // Injeta o token JWT em todas as requests automaticamente
 api.interceptors.request.use((config) => {
   const token = localStorage.getItem('pragma_token')
@@ -29,8 +31,10 @@ export const taskService = {
   create: (data: Omit<Task, 'id' | 'done'>) =>
     api.post<{ task: Task }>('/tasks', data),
 
-  update: (id: string | number, data: Partial<Task>) =>
-    api.put<{ task: Task }>(`/tasks/${id}`, data),
+  update: (id: string | number, data: Partial<Task>) => {
+  console.log('update data:', data)
+  return api.put<{ task: Task }>(`/tasks/${id}`, data)
+},
 
   delete: (id: string | number) =>
     api.delete(`/tasks/${id}`),
