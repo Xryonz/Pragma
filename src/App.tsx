@@ -21,15 +21,24 @@ export default function App() {
   }
 
   // Restaura sessão ao carregar a página
-  useEffect(() => {
-    const savedUser = localStorage.getItem('pragma_user')
-    const token = localStorage.getItem('pragma_token')
-    if (savedUser && token) {
-      setUser(JSON.parse(savedUser))
-      setPage('dashboard')
-    }
-    setLoading(false)
-  }, [])
+  // Captura token do Google OAuth na URL
+useEffect(() => {
+  const params = new URLSearchParams(window.location.search)
+  const token = params.get('token')
+  const name = params.get('name')
+  const email = params.get('email')
+  const id = params.get('id')
+
+  if (token && name && email && id) {
+    const u = { id, name, email }
+    localStorage.setItem('pragma_token', token)
+    localStorage.setItem('pragma_user', JSON.stringify(u))
+    setUser(u)
+    setPage('dashboard')
+    window.history.replaceState({}, '', '/') // limpa a URL
+    notify(`Bem-vindo, ${name.split(' ')[0]}!`)
+  }
+}, [])
 
   // Busca tarefas quando entra no dashboard
   const fetchTasks = useCallback(async () => {
@@ -160,3 +169,4 @@ export default function App() {
     />
   )
 }
+

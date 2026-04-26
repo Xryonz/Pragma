@@ -59,7 +59,7 @@ export function LoginPage({ onLogin, onGoogle, onGoRegister, notification }: Pro
               <div className="flex-1 h-px bg-neutral-900" />
             </div>
 
-            <GoogleButton onClick={onGoogle} />
+           <GoogleButton onClick={() => window.location.href = 'https://pragma-backend-production.up.railway.app/api/auth/google'} />
           </div>
         </div>
       </div>

@@ -71,7 +71,7 @@ export function RegisterPage({ onRegister, onGoLogin, notification }: Props) {
               <div className="flex-1 h-px bg-neutral-900" />
             </div>
 
-            <GoogleButton onClick={() => {}} />
+           <GoogleButton onClick={() => window.location.href = 'https://pragma-backend-production.up.railway.app/api/auth/google'} />
           </div>
         </div>
       </div>
