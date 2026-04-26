@@ -16,12 +16,13 @@ interface Props {
 
 export function TaskCard({ task, onToggle, onEdit, onDelete }: Props) {
   const isOverdue =
-    task.deadline && !task.done && new Date(task.deadline + 'T00:00:00') < new Date()
+  task.deadline && !task.done && new Date(task.deadline.split('T')[0] + 'T12:00:00') < new Date()
 
-  const formatDate = (d: string) =>
-  new Date(d + 'T00:00:00').toLocaleDateString('pt-BR', {
-    day: '2-digit', month: '2-digit', year: '2-digit',
-  })
+  const formatDate = (d: string) => {
+  const clean = d.split('T')[0]
+  const [year, month, day] = clean.split('-')
+  return `${day}/${month}/${year.slice(2)}`
+}
 
   return (
     <div
